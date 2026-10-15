@@ -2,8 +2,9 @@
 """
 Comercial 30 s — Oberdan System Energia Solar (16:9).
 
-Visual minimalista e premium, com tipografia de impacto (ANTON + Playfair
-Display ouro) que “bate” no ritmo, e trilha hype original (trilha_hype.py).
+Visual minimalista e profissional, tipografia “type build” em Montserrat
+ExtraBold (linhas em contorno que constroem a palavra-chave no ritmo) e
+trilha hype original (trilha_hype.py).
 Monta os clipes, aplica as animações, transições (corte seco com clarão ou
 fade de 0.2 s), cartela final com CTA e trilha/SFX sincronizados aos cortes.
 
@@ -45,60 +46,67 @@ PUSH_IN = 0.035            # zoom lento por cena (0 desliga). 0.035 = 3,5 %
 SR = 48000                 # áudio
 
 # ────────────────────────────── Tipografia ──────────────────────────────
-# Dupla marcante: ANTON (caixa-alta condensada e pesada — o “soco”) + Playfair
-# Display Black Italic em ouro metálico (o luxo). Apoio em Montserrat.
-# Todas são Google Fonts sob licença OFL (uso comercial livre) e ficam em
-# ./fontes. Cada entrada: (arquivos candidatos, peso do eixo wght ou None).
-FONTES = {
-    "impacto": (["Anton-Regular.ttf"], None),
-    "ouro": (["PlayfairDisplay-Italic[wght].ttf"], 900),
-    "apoio": (["Montserrat[wght].ttf"], 800),
+# Estilo “type build”: sans geométrica pesada em caixa-alta (Montserrat
+# ExtraBold). A palavra-chave se constrói em 3 linhas alinhadas à esquerda —
+# duas em contorno (eco parcial da palavra) e a última sólida, completa:
+#       ENT
+#       ENTRE
+#       ENTREGA
+# Uma linha de apoio menor, espaçada, fica acima do bloco. Montserrat é Google
+# Font sob licença OFL (uso comercial livre) e fica em ./fontes.
+FONTES = {  # (arquivos candidatos, peso do eixo wght)
+    "forte": (["Montserrat[wght].ttf"], 800),
+    "apoio": (["Montserrat[wght].ttf"], 600),
 }
-FONTE_RESERVA = ["InterDisplay-Black.otf", "Inter-Black.otf", "DejaVuSans-Bold.ttf"]
-COR_TEXTO = (250, 250, 250)
-OURO = ((255, 244, 200), (247, 198, 74), (196, 128, 16))   # brilho → corpo → sombra
+FONTE_RESERVA = ["InterDisplay-ExtraBold.otf", "Inter-ExtraBold.otf", "DejaVuSans-Bold.ttf"]
+BRANCO = (255, 255, 255)
+CINZA_APOIO = (215, 215, 220)
+AMBAR = (255, 184, 0)               # destaque da oferta (21x sem juros)
 VERDE_CTA = (37, 211, 102)          # #25D366 — verde WhatsApp
-TITULO_PX = 118                    # corpo do ANTON a 1080p
-TRACKING_IMPACTO = 0.02            # +2 % de respiro nas maiúsculas
-SLAM_ZOOM = 0.35                   # o título entra 35 % maior e “bate” no lugar
-SLAM_DUR = 0.22                    # duração do slam (ease-out cúbico)
+DESTAQUE_PX = 122                   # palavra-chave a 1080p
+APOIO_PX = 40                       # linha de apoio
+TRACKING_DESTAQUE = 0.0
+TRACKING_APOIO = 0.28               # caixa-alta bem espaçada
+CONTORNO_PX = 3                     # espessura do traço das linhas-eco
+ECO = (0.4, 0.7)                    # fração de letras de cada linha-eco
+OPACIDADE_ECO = 0.9
 
 # ─────────────────────────────── Cenas ──────────────────────────────────
-# titulo: (parte em ANTON branco, parte em itálico ouro).
+# titulo: (linha de apoio, palavra-chave que se constrói).
 # clipes: lista de (padrão do nome, ponto de entrada em s). O primeiro que
 # existir na pasta é usado — o nome original do roteiro vem primeiro e o
 # clipe equivalente entregue vem como alternativa.
 # transicao: como a cena ENTRA ("corte" seco, "fade" de 0.2 s ou "preto").
 # flash: clarão branco de 0.14 s no corte (acompanha os graves).
 # sfx: o que toca no início da cena ("swoosh", "grave", "riser", "impacto").
-# posicao: altura do centro do texto (0 = topo, 1 = base). Padrão 0.5.
+# posicao: centro vertical do bloco de texto (0 = topo, 1 = base). Padrão 0.5.
 CENAS = [
-    dict(inicio=0, fim=3, titulo=("O PODER.", "Redefinido."),
+    dict(inicio=0, fim=3, titulo=("O PODER.", "REDEFINIDO."),
          clipes=[("*Solar_panel_side_view*", 0.0), ("*rooftop_solar*", 0.0)],
          transicao="preto", sfx=["grave"]),
-    dict(inicio=3, fim=7, titulo=("TECNOLOGIA DE", "alta eficiência."),
+    dict(inicio=3, fim=7, titulo=("TECNOLOGIA DE", "ALTA EFICIÊNCIA"),
          clipes=[("*Sunlight_hitting_glass*", 0.5), ("*Solar_panel_grid_panning*", 2.0)],
-         posicao=0.82, transicao="corte", flash=True, sfx=["swoosh", "grave"]),
-    dict(inicio=7, fim=10, titulo=("CONSTRUÍDO PARA", "durar."),
+         posicao=0.78, transicao="corte", flash=True, sfx=["swoosh", "grave"]),
+    dict(inicio=7, fim=10, titulo=("CONSTRUÍDO PARA", "DURAR."),
          clipes=[("*Solar_panel_surface_texture*", 1.0), ("*Light_reflecting_on_textured_glass*", 1.0)],
          transicao="fade", sfx=["swoosh"]),
-    dict(inicio=10, fim=14, titulo=("PRONTA ENTREGA", "imediata."),
+    dict(inicio=10, fim=14, titulo=("PRONTA", "ENTREGA"),
          clipes=[("*Pallets_of_solar_panels*", 0.5)],
          transicao="fade", sfx=["swoosh"]),
-    dict(inicio=14, fim=18, titulo=("ENGENHARIA DE", "alta precisão."),
+    dict(inicio=14, fim=18, titulo=("ENGENHARIA DE", "ALTA PRECISÃO"),
          clipes=[("*Technician_adjusting*", 0.5), ("*Hands_tightening_metal_bracket*", 0.5)],
-         posicao=0.17, transicao="corte", flash=True, sfx=["swoosh", "grave"]),
-    dict(inicio=18, fim=22, titulo=("SUA CASA.", "Seu futuro."),
+         posicao=0.24, transicao="corte", flash=True, sfx=["swoosh", "grave"]),
+    dict(inicio=18, fim=22, titulo=("SUA CASA.", "SEU FUTURO."),
          clipes=[("*Modern_house_with_solar*", 0.5), ("*rooftop_solar*", 3.6)],
          transicao="fade", sfx=["swoosh"]),
-    dict(inicio=22, fim=26, titulo=("TRANSFORMANDO O", "agronegócio."),
+    dict(inicio=22, fim=26, titulo=("TRANSFORMANDO O", "AGRONEGÓCIO"),
          clipes=[("*Solar_farm_aerial*", 1.0), ("*Drone_descending_over_solar_farm*", 2.0)],
-         posicao=0.84, transicao="fade", sfx=["swoosh", "riser"]),
+         posicao=0.76, transicao="fade", sfx=["swoosh", "riser"]),
     dict(inicio=26, fim=30, final=True, transicao="corte", flash=True, sfx=["impacto"]),
 ]
 
 MARCA = "OBERDAN SYSTEM"
-MARCA_SUB = "Energia Solar"
+MARCA_SUB = "ENERGIA SOLAR"
 CTA_OFERTA = ("21x SEM JUROS", "+5 ANOS DE MERCADO")
 CTA_WHATSAPP = "WHATSAPP  (74) 99133-5673"
 LOGO_PADROES = ["*logo*.png", "*logo*.jpg", "*logo*.jpeg", "*logo*.webp", "*logo*.mp4", "*logo*.mov"]
@@ -129,7 +137,7 @@ def achar_arquivo(pasta: Path, padroes) -> tuple[Path, float] | tuple[None, None
     return None, None
 
 
-_cache_fontes: dict = {}
+_avisos_fonte: set = set()
 
 
 def achar_fonte(chave: str, tamanho: int) -> ImageFont.FreeTypeFont:
@@ -146,143 +154,139 @@ def achar_fonte(chave: str, tamanho: int) -> ImageFont.FreeTypeFont:
             if not achados:
                 continue
             fonte = ImageFont.truetype(str(achados[0]), tamanho)
-            if peso and nome in nomes:
+            if nome in nomes:
                 try:
                     fonte.set_variation_by_axes([peso])
                 except OSError:
                     pass
-            if nome not in nomes and chave not in _cache_fontes:
+            elif chave not in _avisos_fonte:
                 print(f"  ! fonte de '{chave}' não encontrada — usando {nome}")
-            _cache_fontes[chave] = True
+                _avisos_fonte.add(chave)
             return fonte
     return ImageFont.load_default(tamanho)
 
 
 # ═══════════════════════════ tipografia (PNG) ═══════════════════════════
-def _ouro(w: int, h: int) -> Image.Image:
-    """Gradiente vertical metálico de 3 paradas."""
-    y = np.linspace(0, 1, max(h, 1))[:, None, None]
-    c0, c1, c2 = (np.array(c, float) for c in OURO)
-    cor = np.where(y < 0.45, c0 + (c1 - c0) * (y / 0.45), c1 + (c2 - c1) * ((y - 0.45) / 0.55))
-    return Image.fromarray(cor.repeat(max(w, 1), axis=1).astype(np.uint8), "RGB")
+def _alfa(mascara: Image.Image, cor=(0, 0, 0)) -> Image.Image:
+    return Image.merge("RGBA", (*[Image.new("L", mascara.size, c) for c in cor], mascara))
 
 
-def _alfa(mascara: Image.Image) -> Image.Image:
-    vazio = Image.new("L", mascara.size, 0)
-    return Image.merge("RGBA", (vazio, vazio, vazio, mascara))
+def _largura(texto: str, fonte, tracking: float) -> float:
+    return fonte.getlength(texto) + tracking * fonte.size * max(len(texto) - 1, 0)
 
 
-def desenhar_runs(camada: Image.Image, runs: list[tuple], y_centro: int, *, sombra=0.65,
-                  largura_max=int(W * 0.88), espaco=0.32) -> None:
-    """Desenha uma linha centralizada composta de trechos com fontes diferentes.
-    runs: (texto, chave_fonte, tamanho, estilo, tracking) — estilo é "ouro" ou uma cor RGB.
-    Trechos em outras fontes têm o corpo ajustado para a mesma altura de maiúscula do 1º."""
-    def carregar(escala: float):
-        fontes = [achar_fonte(k, max(int(t * escala), 8)) for _, k, t, _, _ in runs]
-        ref = -fontes[0].getbbox("H", anchor="ls")[1]
-        ajust = []
-        for f, (_, k, t, _, _) in zip(fontes, runs):
-            cap = -f.getbbox("H", anchor="ls")[1]
-            # recarrega (font_variant perderia o peso da fonte variável)
-            ajust.append(f if k == runs[0][1] else achar_fonte(k, max(int(f.size * ref / cap), 8)))
-        return ajust, ref
+def _mascara_texto(texto: str, fonte, x: float, base_y: float, tracking: float,
+                   contorno: int = 0) -> Image.Image:
+    """Máscara da linha com tracking real (posições via getlength preservam o kerning).
+    contorno > 0 devolve só o traço (letra vazada)."""
+    cheio = Image.new("L", (W, H), 0)
+    traco = Image.new("L", (W, H), 0) if contorno else None
+    dc = ImageDraw.Draw(cheio)
+    dt = ImageDraw.Draw(traco) if contorno else None
+    for i, ch in enumerate(texto):
+        xi = x + fonte.getlength(texto[:i]) + tracking * fonte.size * i
+        dc.text((xi, base_y), ch, font=fonte, fill=255, anchor="ls")
+        if contorno:
+            dt.text((xi, base_y), ch, font=fonte, fill=255, anchor="ls",
+                    stroke_width=contorno, stroke_fill=255)
+    if not contorno:
+        return cheio
+    # traço centrado no contorno da letra: letra engordada − letra erodida (um anel contínuo)
+    erodido = cheio.filter(ImageFilter.MinFilter(2 * (contorno // 2) + 1)) if contorno > 1 else cheio
+    anel = np.clip(np.array(traco, int) - np.array(erodido, int), 0, 255)
+    return Image.fromarray(anel.astype(np.uint8))
 
-    fontes, cap = carregar(1.0)
-    larguras = lambda fs: [f.getlength(txt) + tr * f.size * (len(txt) - 1)  # noqa: E731
-                           for f, (txt, *_r, tr) in zip(fs, runs)]
-    total = sum(larguras(fontes)) + espaco * fontes[0].size * (len(runs) - 1)
-    if total > largura_max:
-        fontes, cap = carregar(largura_max / total)
-        total = sum(larguras(fontes)) + espaco * fontes[0].size * (len(runs) - 1)
 
-    base_y = y_centro + cap / 2
-    x = (W - total) / 2
-    m_tudo = Image.new("L", (W, H), 0)
-    pintar = []
-    for f, larg, (txt, _, _, estilo, tr) in zip(fontes, larguras(fontes), runs):
-        m = Image.new("L", (W, H), 0)
-        d = ImageDraw.Draw(m)
-        for i, ch in enumerate(txt):
-            d.text((x + f.getlength(txt[:i]) + tr * f.size * i, base_y), ch, font=f, fill=255, anchor="ls")
-        m_tudo = Image.fromarray(np.maximum(np.array(m_tudo), np.array(m)))
-        pintar.append((m, estilo))
-        x += larg + espaco * fontes[0].size
-
+def _pintar(camada: Image.Image, mascara: Image.Image, cor, *, sombra=0.55, opacidade=1.0) -> None:
     if sombra:
-        s = m_tudo.filter(ImageFilter.GaussianBlur(cap * 0.28)).point(lambda v: int(v * sombra))
-        camada.alpha_composite(_alfa(s), (0, 6))
-        borda = m_tudo.filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.GaussianBlur(1.5))
-        camada.alpha_composite(_alfa(borda.point(lambda v: int(v * 0.35))))
-    for m, estilo in pintar:
-        if estilo == "ouro":
-            caixa = m.getbbox()
-            if caixa:
-                tinta = Image.new("RGB", (W, H))
-                tinta.paste(_ouro(caixa[2] - caixa[0], caixa[3] - caixa[1]), caixa[:2])
-                camada.paste(tinta, (0, 0), m)
-        else:
-            camada.paste(Image.new("RGB", (W, H), estilo), (0, 0), m)
+        s = mascara.filter(ImageFilter.GaussianBlur(14)).point(lambda v: int(v * sombra))
+        camada.alpha_composite(_alfa(s), (0, 5))
+    if opacidade < 1:
+        mascara = mascara.point(lambda v: int(v * opacidade))
+    camada.alpha_composite(_alfa(mascara, cor))
 
 
-def png_titulo(titulo: tuple[str, str], posicao: float, destino: Path) -> Path:
+def pngs_bloco(apoio: str, destaque: str, posicao: float, prefixo: Path,
+               tamanho: int = DESTAQUE_PX) -> list[Path]:
+    """Gera 4 camadas (apoio, eco 1, eco 2, sólida) do bloco “type build”, prontas para
+    entrar em sequência. O bloco é alinhado à esquerda e centralizado pela linha mais larga."""
+    fonte = achar_fonte("forte", tamanho)
+    larg_max = W * 0.86
+    if _largura(destaque, fonte, TRACKING_DESTAQUE) > larg_max:
+        fonte = achar_fonte("forte", int(tamanho * larg_max / _largura(destaque, fonte, TRACKING_DESTAQUE)))
+    f_apoio = achar_fonte("apoio", max(int(APOIO_PX * fonte.size / DESTAQUE_PX), 24))
+    cap = -fonte.getbbox("H", anchor="ls")[1]
+    cap_apoio = -f_apoio.getbbox("H", anchor="ls")[1]
+    passo = cap * 1.3                                   # entrelinha do empilhamento
+    altura = cap_apoio + cap * 0.75 + passo * 2 + cap
+    topo = min(max(H * posicao - altura / 2, H * 0.07), H * 0.93 - altura)
+    x0 = (W - _largura(destaque, fonte, TRACKING_DESTAQUE)) / 2
+
+    n = len(destaque)
+    ecos = [destaque[:max(1, -(-int(n * f * 10) // 10))].rstrip() for f in ECO]   # ceil
+    linhas = [
+        (apoio, f_apoio, TRACKING_APOIO, topo + cap_apoio, 0, CINZA_APOIO, 1.0),
+        (ecos[0], fonte, TRACKING_DESTAQUE, topo + cap_apoio + cap * 0.75 + cap, CONTORNO_PX, BRANCO, OPACIDADE_ECO),
+        (ecos[1], fonte, TRACKING_DESTAQUE, topo + cap_apoio + cap * 0.75 + cap + passo, CONTORNO_PX, BRANCO, OPACIDADE_ECO),
+        (destaque, fonte, TRACKING_DESTAQUE, topo + cap_apoio + cap * 0.75 + cap + passo * 2, 0, BRANCO, 1.0),
+    ]
+    saida = []
+    for i, (txt, f, tr, base, contorno, cor, op) in enumerate(linhas):
+        camada = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        _pintar(camada, _mascara_texto(txt, f, x0, base, tr, contorno), cor,
+                sombra=0.35 if contorno else 0.6, opacidade=op)
+        destino = prefixo.with_name(f"{prefixo.name}_{i}.png")
+        camada.save(destino)
+        saida.append(destino)
+    return saida
+
+
+def png_linha(destino: Path, trechos: list[tuple[str, str, int, tuple, float]], y_centro: int,
+              espaco: float = 0.5) -> Path:
+    """Linha centralizada com trechos de cores diferentes: (texto, fonte, px, cor, tracking)."""
     camada = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    principal, destaque = titulo
-    desenhar_runs(camada, [(principal, "impacto", TITULO_PX, COR_TEXTO, TRACKING_IMPACTO),
-                           (destaque, "ouro", TITULO_PX, "ouro", 0.0)], int(H * posicao))
+    fontes = [achar_fonte(k, px) for _, k, px, _, _ in trechos]
+    larguras = [_largura(t, f, tr) for f, (t, _, _, _, tr) in zip(fontes, trechos)]
+    gap = espaco * fontes[0].size
+    x = (W - sum(larguras) - gap * (len(trechos) - 1)) / 2
+    cap = -fontes[0].getbbox("H", anchor="ls")[1]
+    for f, larg, (txt, _, _, cor, tr) in zip(fontes, larguras, trechos):
+        _pintar(camada, _mascara_texto(txt, f, x, y_centro + cap / 2, tr), cor)
+        x += larg + gap
     camada.save(destino)
     return destino
 
 
 def png_degrade_inferior(destino: Path) -> Path:
-    """Escurece os 45 % inferiores para o CTA ler bem sobre qualquer logo."""
+    """Escurece a metade inferior para o CTA ler bem sobre qualquer logo."""
     y = np.clip((np.arange(H) - H * 0.5) / (H * 0.5), 0, 1) ** 1.4
     alfa = (y * 0.85 * 255).astype(np.uint8)[:, None].repeat(W, axis=1)
     _alfa(Image.fromarray(alfa)).save(destino)
     return destino
 
 
-def png_marca(destino: Path, y_centro: int) -> Path:
-    camada = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    desenhar_runs(camada, [(MARCA, "impacto", 168, COR_TEXTO, 0.035)], y_centro)
-    desenhar_runs(camada, [(MARCA_SUB, "ouro", 92, "ouro", 0.0)], y_centro + 128, sombra=0.5)
-    camada.save(destino)
-    return destino
-
-
-def png_linha_cta(destino: Path, y_centro: int) -> Path:
-    camada = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    desenhar_runs(camada, [(CTA_OFERTA[0], "impacto", 80, "ouro", 0.03),
-                           ("|", "apoio", 80, (150, 150, 150), 0.0),
-                           (CTA_OFERTA[1], "impacto", 80, COR_TEXTO, 0.03)], y_centro, espaco=0.45)
-    camada.save(destino)
-    return destino
-
-
 def png_botao_whatsapp(destino: Path, y_centro: int) -> Path:
     camada = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    fonte = achar_fonte("apoio", 46)
-    larg = fonte.getlength(CTA_WHATSAPP) + 2 * 56
-    alt = 104
+    fonte = achar_fonte("forte", 44)
+    larg = _largura(CTA_WHATSAPP, fonte, 0.04) + 2 * 56
+    alt = 100
     x0, y0 = (W - larg) / 2, y_centro - alt / 2
     sombra = Image.new("L", (W, H), 0)
     ImageDraw.Draw(sombra).rounded_rectangle((x0, y0 + 8, x0 + larg, y0 + alt + 8), alt / 2, fill=140)
     camada.alpha_composite(_alfa(sombra.filter(ImageFilter.GaussianBlur(16))))
-    brilho = Image.new("L", (W, H), 0)   # halo verde
-    ImageDraw.Draw(brilho).rounded_rectangle((x0, y0, x0 + larg, y0 + alt), alt / 2, fill=120)
-    halo = Image.merge("RGBA", (*[Image.new("L", (W, H), c) for c in VERDE_CTA], brilho.filter(ImageFilter.GaussianBlur(28))))
-    camada.alpha_composite(halo)
     ImageDraw.Draw(camada).rounded_rectangle((x0, y0, x0 + larg, y0 + alt), alt / 2, fill=(*VERDE_CTA, 255))
-    desenhar_runs(camada, [(CTA_WHATSAPP, "apoio", 46, (255, 255, 255), 0.02)], y_centro, sombra=0)
+    cap = -fonte.getbbox("H", anchor="ls")[1]
+    camada.alpha_composite(_alfa(_mascara_texto(CTA_WHATSAPP, fonte, x0 + 56, y_centro + cap / 2, 0.04), BRANCO))
     camada.save(destino)
     return destino
 
 
 def png_fundo_cartela(destino: Path) -> Path:
-    """Fundo preto com brilho radial dourado bem sutil (cena sem clipe / assinatura)."""
+    """Fundo preto com brilho radial bem sutil (cena sem clipe / assinatura)."""
     yy, xx = np.mgrid[0:H, 0:W]
     r = np.sqrt(((xx - W / 2) / (W * 0.6)) ** 2 + ((yy - H * 0.46) / (H * 0.6)) ** 2)
     v = np.clip(1 - r, 0, 1) ** 2
-    rgb = np.stack([8 + 34 * v, 7 + 24 * v, 6 + 8 * v], axis=-1)
+    rgb = np.stack([8 + 20 * v, 8 + 20 * v, 9 + 22 * v], axis=-1)
     Image.fromarray(rgb.astype(np.uint8), "RGB").save(destino)
     return destino
 
@@ -307,7 +311,7 @@ def tratamento_base(dur: float) -> str:
 def renderizar_segmento(base: dict, camadas: list[dict], dur: float, destino: Path,
                         entrada: tuple[str, float] | None = None) -> None:
     """base: {'video': Path, 'entrada': s} ou {'imagem': Path}.
-    camadas: {'png', 'ini', 'fim' (ou None), 'modo': 'slam' | 'sobe', 'cy': centro y do texto}.
+    camadas: {'png', 'ini' (s), 'fim' (s ou None)} — cada uma entra subindo e some em 0.2 s.
     entrada: ('black' | 'white', duração) — abre a cena do preto ou com clarão branco."""
     cmd = ["ffmpeg", "-y", "-v", "error"]
     if "video" in base:
@@ -322,15 +326,9 @@ def renderizar_segmento(base: dict, camadas: list[dict], dur: float, destino: Pa
     atual = "v0"
     for i, c in enumerate(camadas, start=1):
         ini = c["ini"]
-        if c["modo"] == "slam":
-            # entra SLAM_ZOOM maior e “bate” no lugar (ease-out cúbico), ancorado no centro do texto
-            z = f"1+{SLAM_ZOOM}*pow(1-clip((on/{FPS}-{ini:.3f})/{SLAM_DUR},0,1),3)"
-            anim = (f"format=rgba,zoompan=z='{z}':x='{W / 2}*(1-1/zoom)':y='{c['cy']}*(1-1/zoom)'"
-                    f":d=1:s={W}x{H}:fps={FPS},fade=t=in:st={ini:.3f}:d=0.1:alpha=1")
-            y = "0"
-        else:
-            anim = f"format=rgba,fade=t=in:st={ini:.3f}:d=0.35:alpha=1"
-            y = f"36*pow(1-clip((t-{ini:.3f})/0.45,0,1),3)"
+        # entra rápido: opacidade em 0.15 s e sobe 26 px com ease-out cúbico em 0.35 s
+        anim = f"format=rgba,fade=t=in:st={ini:.3f}:d=0.15:alpha=1"
+        y = f"26*pow(1-clip((t-{ini:.3f})/0.35,0,1),3)"
         if c["fim"] is not None:
             anim += f",fade=t=out:st={c['fim'] - 0.2:.3f}:d=0.2:alpha=1"
         grafo.append(f"[{i}:v]{anim}[t{i}]")
@@ -515,21 +513,21 @@ def main() -> None:
             if logo:
                 base = ({"video": logo, "entrada": 0.0} if logo.suffix.lower() in (".mp4", ".mov")
                         else {"imagem": logo})
-                camadas.append(dict(png=png_degrade_inferior(tmp / "degrade.png"), ini=0.5, fim=None, modo="sobe"))
+                camadas.append(dict(png=png_degrade_inferior(tmp / "degrade.png"), ini=0.5, fim=None))
                 y_linha, y_botao = int(H * 0.79), int(H * 0.90)
                 print(f"{rotulo}  logo: {logo.name}")
             else:
                 base = {"imagem": fundo}
-                y_marca = int(H * 0.36)
-                camadas.append(dict(png=png_marca(tmp / "marca.png", y_marca), ini=0.08, fim=None,
-                                    modo="slam", cy=y_marca + 50))
-                y_linha, y_botao = int(H * 0.66), int(H * 0.79)
+                marca = pngs_bloco(MARCA_SUB, MARCA, 0.36, tmp / "marca")
+                camadas += [dict(png=png, ini=0.125 * (i + 1), fim=None) for i, png in enumerate(marca)]
+                y_linha, y_botao = int(H * 0.70), int(H * 0.82)
                 print(f"{rotulo}  ! logo não encontrada — usando assinatura tipográfica")
-            # oferta “bate” em 27.0 s (stomp) e o botão sobe no clap de 27.5 s
-            camadas.append(dict(png=png_linha_cta(tmp / "cta.png", y_linha), ini=0.78, fim=None,
-                                modo="slam", cy=y_linha))
-            camadas.append(dict(png=png_botao_whatsapp(tmp / "whatsapp.png", y_botao), ini=1.38, fim=None,
-                                modo="sobe"))
+            oferta = png_linha(tmp / "cta.png", [(CTA_OFERTA[0], "forte", 62, AMBAR, 0.02),
+                                                 ("|", "apoio", 62, (110, 110, 115), 0.0),
+                                                 (CTA_OFERTA[1], "forte", 62, BRANCO, 0.02)], y_linha)
+            # oferta entra no stomp de 27.0 s e o botão no clap de 27.5 s
+            camadas.append(dict(png=oferta, ini=1.0, fim=None))
+            camadas.append(dict(png=png_botao_whatsapp(tmp / "whatsapp.png", y_botao), ini=1.5, fim=None))
             instante_whatsapp = cena["inicio"] + 1.5
             renderizar_segmento(base, camadas, dur, seg, entrada=("white", 0.2))
         else:
@@ -543,13 +541,12 @@ def main() -> None:
             else:
                 base = {"imagem": fundo}
                 print(f"{rotulo}  ! clipe {cena['clipes'][0][0]} ausente — cartela escura  “{frase}”")
-            cy = int(H * cena.get("posicao", 0.5))
-            titulo = png_titulo(cena["titulo"], cena.get("posicao", 0.5), tmp / f"titulo{k + 1:02d}.png")
-            # o slam assenta no clap (meio da batida): 0.28 + 0.22 = 0.5 s após o corte
-            ini_txt = 0.78 if k == 0 else 0.28
+            linhas = pngs_bloco(*cena["titulo"], cena.get("posicao", 0.5), tmp / f"titulo{k + 1:02d}")
+            # as 4 linhas entram em semicolcheias (0.125 s a 120 BPM); a sólida cai no clap
+            atraso = 0.5 if k == 0 else 0.0
             fim_txt = dur_cena - 0.06 if prox and prox["transicao"] == "corte" else dur_cena
-            renderizar_segmento(base, [dict(png=titulo, ini=ini_txt, fim=fim_txt, modo="slam", cy=cy)],
-                                dur, seg, abertura)
+            camadas = [dict(png=png, ini=atraso + 0.125 * (i + 1), fim=fim_txt) for i, png in enumerate(linhas)]
+            renderizar_segmento(base, camadas, dur, seg, abertura)
         segmentos.append((seg, dur))
         if prox:
             transicoes.append(prox["transicao"])

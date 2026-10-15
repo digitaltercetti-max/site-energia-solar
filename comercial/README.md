@@ -1,13 +1,13 @@
 # Comercial 30 s: Oberdan System Energia Solar
 
 Formato 16:9 · 1920×1080 · 24 fps · H.264 + AAC 320 kbps · −14 LUFS
-Estilo: visual minimalista e premium, com tipografia de impacto e trilha hype no clima de *O Lobo de Wall Street*.
+Estilo: visual minimalista e profissional, tipografia “type build” em Montserrat e trilha hype no clima de *O Lobo de Wall Street*.
 
 ```
 comercial/
 ├── montar_comercial.py   # monta tudo (vídeo, tipografia, transições, áudio)
 ├── trilha_hype.py        # trilha original sintetizada (120 BPM, Ré menor)
-├── fontes/               # Anton, Playfair Display, Montserrat (licença OFL)
+├── fontes/               # Montserrat (licença OFL)
 ├── clipes/               # coloque aqui os clipes e a logo (não versionados)
 └── saida/                # master final (não versionado)
 ```
@@ -31,40 +31,47 @@ nome do arquivo tiver “logo” (`.png`, `.jpg`, `.webp`, `.mp4` ou `.mov`).
 
 ## 1. Timeline (EDL)
 
-| # | Tempo | Clipe (roteiro → arquivo usado) | Texto (ANTON + *ouro*) | Entrada | Música / SFX |
+| # | Tempo | Clipe (roteiro → arquivo usado) | Texto (apoio / **palavra-chave**) | Entrada | Música / SFX |
 |---|---|---|---|---|---|
-| 1 | 00:00–03:00 | `Solar_panel_side_view` → *rooftop_solar* (0 s) | O PODER. *Redefinido.* | do preto 0.4 s | metal “BWAAM” + prato, coro de peito “hm-hm” com batidas no peito, prato reverso |
-| 2 | 03:00–07:00 | `Sunlight_hitting_glass_surface` → *Solar_panel_grid_panning* (2 s) | TECNOLOGIA DE *alta eficiência.* | **corte + clarão branco** | DROP: entra o groove stomp-stomp-clap e o baixo, stab de metal, deep bass |
-| 3 | 07:00–10:00 | `Solar_panel_surface_texture` → *Light_reflecting_on_textured_glass* (1 s) | CONSTRUÍDO PARA *durar.* | fade 0.2 s | entra o chimbal; stab em Si♭ |
-| 4 | 10:00–14:00 | `Pallets_of_solar_panels_stored` → *(falta: cartela)* | PRONTA ENTREGA *imediata.* | fade 0.2 s | stab em Dó; virada de toms em 13 s |
-| 5 | 14:00–18:00 | `Technician_adjusting_solar_panel` → *Hands_tightening_metal_bracket* (0.5 s) | ENGENHARIA DE *alta precisão.* | **corte + clarão branco** | caixa junto das palmas, bumbo sincopado, metais em síncope, deep bass |
-| 6 | 18:00–22:00 | `Modern_house_with_solar_panels` → *rooftop_solar* (3.6 s) | SUA CASA. *Seu futuro.* | fade 0.2 s | coro “hmm” nas cabeças de compasso |
-| 7 | 22:00–26:00 | `Solar_farm_aerial_view` → *Drone_descending_over_solar_farm* (2 s) | TRANSFORMANDO O *agronegócio.* | fade 0.2 s | Sol menor; 24–26 s: rufo de caixa acelerando + metais em crescendo + riser |
-| 8 | 26:00–30:00 | Logo 3D 16:9 → *(falta: assinatura)* | OBERDAN SYSTEM / *Energia Solar* → 27.0 s: “21x SEM JUROS \| +5 ANOS DE MERCADO” → 27.5 s: botão WhatsApp | **corte + clarão branco** | IMPACTO: metal cheio, coro, prato e sub; groove volta em 27 s; botão final em 29 s |
+| 1 | 00:00–03:00 | `Solar_panel_side_view` → *rooftop_solar* (0 s) | O PODER. / **REDEFINIDO.** | do preto 0.4 s | metal “BWAAM” + prato, coro de peito “hm-hm” com batidas no peito, prato reverso |
+| 2 | 03:00–07:00 | `Sunlight_hitting_glass_surface` → *Solar_panel_grid_panning* (2 s) | TECNOLOGIA DE / **ALTA EFICIÊNCIA** | **corte + clarão branco** | DROP: entra o groove stomp-stomp-clap e o baixo, stab de metal, deep bass |
+| 3 | 07:00–10:00 | `Solar_panel_surface_texture` → *Light_reflecting_on_textured_glass* (1 s) | CONSTRUÍDO PARA / **DURAR.** | fade 0.2 s | entra o chimbal; stab em Si♭ |
+| 4 | 10:00–14:00 | `Pallets_of_solar_panels_stored` → *(falta: cartela)* | PRONTA / **ENTREGA** | fade 0.2 s | stab em Dó; virada de toms em 13 s |
+| 5 | 14:00–18:00 | `Technician_adjusting_solar_panel` → *Hands_tightening_metal_bracket* (0.5 s) | ENGENHARIA DE / **ALTA PRECISÃO** | **corte + clarão branco** | caixa junto das palmas, bumbo sincopado, metais em síncope, deep bass |
+| 6 | 18:00–22:00 | `Modern_house_with_solar_panels` → *rooftop_solar* (3.6 s) | SUA CASA. / **SEU FUTURO.** | fade 0.2 s | coro “hmm” nas cabeças de compasso |
+| 7 | 22:00–26:00 | `Solar_farm_aerial_view` → *Drone_descending_over_solar_farm* (2 s) | TRANSFORMANDO O / **AGRONEGÓCIO** | fade 0.2 s | Sol menor; 24–26 s: rufo de caixa acelerando + metais em crescendo + riser |
+| 8 | 26:00–30:00 | Logo 3D 16:9 → *(falta: assinatura)* | ENERGIA SOLAR / **OBERDAN SYSTEM** → 27.0 s: “21x SEM JUROS \| +5 ANOS DE MERCADO” → 27.5 s: botão WhatsApp | **corte + clarão branco** | IMPACTO: metal cheio, coro, prato e sub; groove volta em 27 s; botão final em 29 s |
 
 Regras de edição aplicadas:
-- **120 BPM.** Todos os cortes (3, 7, 10, 14, 18, 22, 26 s) caem na batida. O texto “bate” no lugar exatamente no clap, 0.5 s depois de cada corte.
+- **120 BPM.** Todos os cortes (3, 7, 10, 14, 18, 22, 26 s) caem na batida. O texto se constrói em semicolcheias e a linha sólida cai no clap, 0.5 s depois de cada corte.
 - **Corte seco com clarão branco de 0.14 s** nos momentos de impacto (3 s, 14 s, 26 s), sempre com o deep bass. **Fade de 0.2 s** nas passagens de fluxo.
 - **Push-in de 3.5 %** por cena, mais um grade leve: contraste +5 %, saturação +6 %, vinheta e nitidez leve após o upscale 720p→1080p.
 - O áudio original dos clipes é descartado.
 
-## 2. Tipografia: “marcante”
+## 2. Tipografia: “type build” profissional
 
-A identidade vem do contraste entre uma **grotesca condensada pesada** em caixa-alta (o soco) e uma **serifada itálica Black em ouro metálico** (o luxo, o dinheiro), a mesma linguagem de pôster de cinema e de marcas premium.
+Inspirada no estilo *TYPO / TYPOGRA / TYPOGRAPHY*: uma sans geométrica pesada em caixa-alta. A palavra-chave **se constrói em três linhas alinhadas à esquerda**: duas em contorno vazado, mostrando o começo da palavra, e a última sólida e completa. Uma linha de apoio pequena e bem espaçada fica acima:
 
-| Elemento | Fonte | Tamanho @1080p | Tracking | Cor | Posição |
-|---|---|---|---|---|---|
-| Título (parte 1) | **Anton**, caixa-alta | 118 px | +2 % | `#FAFAFA` | centro; cenas 2 e 7 a 82–84 % da altura, cena 5 a 17 % |
-| Título (parte 2) | **Playfair Display Black Italic** | altura de maiúscula igual à do Anton | 0 | ouro metálico vertical `#FFF4C8 → #F7C64A → #C48010` | na mesma linha de base |
-| Marca (sem logo) | Anton | 168 px | +3.5 % | `#FAFAFA` | 36 % |
-| “Energia Solar” | Playfair Display Black Italic | 92 px | 0 | ouro metálico | logo abaixo da marca |
-| Oferta | Anton | 80 px | +3 % | “21x SEM JUROS” em ouro, separador cinza, “+5 ANOS DE MERCADO” em branco | 66 % (sem logo) / 79 % (com logo) |
-| Botão WhatsApp | Montserrat ExtraBold | 46 px | +2 % | branco sobre pílula `#25D366` com halo verde | 79 % (sem logo) / 90 % (com logo) |
+```
+PRONTA            ← apoio · Montserrat SemiBold 40 px · tracking +28 % · #D7D7DC
+ENT               ← eco 1 · Montserrat ExtraBold 122 px · contorno 3 px · 90 %
+ENTRE             ← eco 2 · idem
+ENTREGA           ← sólida · Montserrat ExtraBold 122 px · #FFFFFF
+```
 
-- **Animação “slam”:** o título entra 35 % maior e bate no lugar em 0.22 s (ease-out cúbico), com opacidade 0→100 % em 0.1 s. A oferta faz o mesmo em 27.0 s; o botão do WhatsApp sobe 36 px em 27.5 s, junto com um tique sonoro.
-- **Legibilidade:** sombra difusa a 65 % (blur de 28 % da altura de maiúscula, 6 px abaixo) e um contorno escuro de 1–2 px. Não há tarjas. Na cartela com logo, a metade inferior recebe um degradê escuro até 85 %.
-- **Área segura:** as linhas ocupam no máximo 88 % da largura e encolhem sozinhas se passarem disso.
-- **Licença:** Anton, Playfair Display e Montserrat são Google Fonts sob **SIL OFL**, livres para uso comercial e veiculação. Os arquivos e as licenças estão em `fontes/`.
+| Elemento | Fonte | Tamanho @1080p | Cor | Posição |
+|---|---|---|---|---|
+| Linha de apoio | Montserrat SemiBold, caixa-alta | 40 px, tracking +28 % | `#D7D7DC` | topo do bloco |
+| Ecos (40 % e 70 % das letras) | Montserrat ExtraBold, contorno vazado | 122 px, traço de 3 px | branco a 90 % | entrelinha de 1.3× a altura da maiúscula |
+| Palavra-chave | Montserrat ExtraBold | 122 px (encolhe se passar de 86 % da largura) | `#FFFFFF` | última linha |
+| Marca (sem logo) | mesmo bloco: ENERGIA SOLAR / OBERDA / OBERDAN SY / **OBERDAN SYSTEM** | 122 px | branco | 36 % da altura |
+| Oferta | Montserrat ExtraBold | 62 px | “21x SEM JUROS” `#FFB800`, separador cinza, resto branco | 70 % (sem logo) / 79 % (com logo) |
+| Botão WhatsApp | Montserrat ExtraBold | 44 px | branco sobre pílula `#25D366` | 82 % (sem logo) / 90 % (com logo) |
+
+- **Posição do bloco:** centralizado pela linha mais larga, com o centro vertical a 50 %. Nas cenas 2 e 7 fica embaixo (78 % e 76 %); na cena 5, em cima (24 %). O bloco sempre respeita 7 % de margem.
+- **Animação:** as linhas entram uma a uma em semicolcheias (0.125 s a 120 BPM): apoio → eco 1 → eco 2 → sólida. Cada uma aparece em 0.15 s, subindo 26 px com ease-out, e a linha sólida cai no clap, 0.5 s depois do corte. A oferta entra no stomp de 27.0 s e o botão no clap de 27.5 s.
+- **Legibilidade:** sombra difusa preta (blur de 14 px, 5 px abaixo), mais fraca nas linhas em contorno. Não há tarjas.
+- **Licença:** Montserrat é Google Font sob **SIL OFL**, livre para uso comercial. O arquivo e a licença estão em `fontes/`.
 
 ## 3. Trilha sonora: hype estilo *O Lobo de Wall Street*
 
